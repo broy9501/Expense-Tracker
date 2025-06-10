@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='expense.css') }}">
+    </head>
+
+    <body>
+
+        {% if msg %}
+            <p class="errorMessage">{{ msg }}</p>
+        {% endif %}
+
+        <div class="mainDisplay">
+            <div class="sideBar">
+                <div class="sideItems">
+                    <ul>
+                        <div class="profile">
+                            <img src="{{ url_for('static', filename='iconImg.webp') }}" alt="" class="iconProfile">
+                            <span>Username</span>
+                        </div>
+                        <li onclick="dashboard()"><i class="fa fa-desktop"></i>Dashboard</li>
+                        <li onclick="viewTrans();"><i class="fa fa-exchange"></i>View Transactions</li>
+                        <li onclick="income()"><i class="fa fa-money"></i>Incomes</li>
+                        <li onclick="expenses()"><i class="fa fa-bitcoin"></i>Expenses</li>
+                        <li onclick="settings()"><i class="fa fa-cog"></i>Settings</li>
+                    </ul>
+                    <div class="signout">
+                        <i class="fa fa-sign-out" style="font-size:24px"></i>
+                        <a href="#" class="signoutButton">Sign Out</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mainSection">
+                <div id="dashboard" class="Dashboard" style="display: flex">
+                    <div class="allTransactionGraph">
+                        <div class="chart">
+                            <canvas id="barChart"></canvas>
+                        </div>
+                    </div>
+    
+                    <div class="listOfInfo">
+                        <div class="recentHistory">
+                            <h2>Recent History</h2>
+                           {% for t in transactions %}
+                            <div class="infoSection">
+                                <h3>{{ t.title }}</h3>
+                                <h3>{{ t.amount }}</h3>
+                            </div>
+                            {% endfor %}
+                            <!-- <div class="infoSection">
+                                <h3>Bitcoin</h3>
+                                <h3>+£2000</h3>
+                            </div>
+    
+                            <div class="infoSection">
+                                <h3>Clothing</h3>
+                                <h3>-£500</h3>
+                            </div> -->
+                        </div>
+    
+                        <!-- <div class="infoSubheading">
+                            <div class="salarySec">
+                                <div class="subheadingSalary">
+                                    <h3>Min</h3>
+                                    <h2>Salary</h2>
+                                    <h3>Max</h3>
+                                </div>
+    
+                                <div class="infoSection">
+                                    <h3>£2000</h3>
+                                    <h3>£2500</h3>
+                                </div>
+                            </div>
+                        </div> -->
+    
+                        <!-- <div class="infoSubheading">
+                            <div class="salarySec">
+                                <div class="subheadingSalary">
+                                    <h3>Min</h3>
+                                    <h2>Expenses</h2>
+                                    <h3>Max</h3>
+                                </div>
+    
+                                <div class="infoSection">
+                                    <h3>£200</h3>
+                                    <h3>£2500</h3>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+    
+                    <div class="totalSec">
+                        <div class="totalIncome">
+                            <h3>Total Income</h3>
+                            <h1>{{ totalIncome.totalIncome }}</h1>
+                        </div>
+    
+                        <div class="totalExpenses">
+                            <h3>Total Expenses</h3>
+                            <h1>{{ sumNegativeTransactions }}</h1>
+                        </div>
+    
+                        <div class="totalBalance">
+                            <h3>Current Currency</h3>
+                            <h1>{{ currencySign.currencySigns }}</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- VIEW TRANSACTION -->
+                <div id="viewTrans" class="ViewTransactions" style="display: none;">
+                    <h2>All Transactions</h2>
+
+
+                    <div class="IncomeList">
+                        {% for t in transactions %}
+                        <div class="transactionAdded">
+                            <h3 class="titleAdded">{{ t.title }}</h3>
+                            <div class="incomeDetailList">
+                                <i class="fa fa-money"></i>
+                                <h4 class="moneyAdded"><i class="fa fa-dollar"></i>{{ t.amount }}</h4>
+                                <h4 class="dateAdded"><i class="fa fa-calendar"></i>{{ t.incomeData }}</h4>
+                                <div class="incomeRef">
+                                    <h4 class="referenceAdded"><i class="fa fa-comment"></i>{{ t.reference or 'No reference' }}</h4>
+                                </div>
+                                <i class="fa fa-trash-o"></i>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="no-expenses">
+                            <p>No expenses recorded yet.</p>
+                        </div>
+                        {% endfor %}
+
+
+                        <!-- <div class="transactionAdded">
+                            <h3 class="titleAdded">From Freelance</h3>
+                            <div class="incomeDetailList">
+                                <i class="fa fa-money"></i>
+                                <h4 class="moneyAdded"><i class="fa fa-dollar"></i>1400</h4>
+                                <h4 class="dateAdded"><i class="fa fa-calendar"></i>25/02/2023</h4>
+                                <div class="incomeRef"><h4 class="referenceAdded"><i class="fa fa-comment"></i>From freelance work.</h4></div>
+                                <i class="fa fa-trash-o"></i>
+                            </div>
+                        </div>
+
+                        <div class="transactionAdded">
+                            <h3 class="titleAdded">From Freelance</h3>
+                            <div class="incomeDetailList">
+                                <i class="fa fa-money"></i>
+                                <h4 class="moneyAdded"><i class="fa fa-dollar"></i>1400</h4>
+                                <h4 class="dateAdded"><i class="fa fa-calendar"></i>25/02/2023</h4>
+                                <div class="incomeRef"><h4 class="referenceAdded"><i class="fa fa-comment"></i>From freelance work.</h4></div>
+                                <i class="fa fa-trash-o"></i>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+
+
+                <!-- INCOME -->
+                <div id="income" class="Income" style="display: none">
+                    <h2>Income</h2>
+
+                    <div class="totalIncomeHeading">
+                        <h1>Total Income: <span style="color: green">{{ totalIncome.totalIncome }}</span></h1>
+                    </div>
+
+                    <div class="mainIncomeSection">
+                        <div class="incomeAdd">
+                            <form action="/income" method="post" class="incomeAddForm">
+                                <input type="text" name="incomeTitle" class="incomeTitleInput" placeholder="Salary Title" required>
+                                <input type="number" name="incomeAmount" class="incomeAmountInput" placeholder="Salary Amount" required>
+                                <input type="date" name="incomeDate" class="incomeDateInput" placeholder="Enter A Date" required>
+                                
+                                <select name="incomeType" class="incomeTypeofInput" required>
+                                    <option value="op1">Option1</option>
+                                    <option value="op2">Option2</option>
+                                    <option value="op3">Option3</option>
+                                    <option value="op4">Option4</option>
+                                </select>
+
+                                <textarea name="incomeReference" class="incomeReferenceInput" rows="8" cols="10" placeholder="Add A Reference"></textarea>
+
+                                <button class="addIncomeBut" type="submit">+ Add Income</button>
+                            </form>
+                        </div>
+
+                        <div class="IncomeList">
+                            {% for t in transactions %}
+                            {% if t.amount|float > 0 %}
+                            <div class="incomeAdded">
+                                <h3 class="titleAdded">{{ t.title }}</h3>
+                                <div class="incomeDetailList">
+                                    <i class="fa fa-money"></i>
+                                    <h4 class="moneyAdded"><i class="fa fa-dollar"></i>{{ t.amount }}</h4>
+                                    <h4 class="dateAdded"><i class="fa fa-calendar"></i>{{ t.incomeData }}</h4>
+                                    <div class="incomeRef">
+                                        <h4 class="referenceAdded"><i class="fa fa-comment"></i>{{ t.reference or 'No reference' }}</h4>
+                                    </div>
+                                    <i class="fa fa-trash-o"></i>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% else %}
+                            <div class="no-expenses">
+                                <p>No expenses recorded yet.</p>
+                            </div>
+                            {% endfor %}
+
+
+
+                            <!-- <div class="incomeAdded">
+                                <h3 class="titleAdded">From Freelance</h3>
+                                <div class="incomeDetailList">
+                                    <i class="fa fa-money"></i>
+                                    <h4 class="moneyAdded"><i class="fa fa-dollar"></i>1400</h4>
+                                    <h4 class="dateAdded"><i class="fa fa-calendar"></i>25/02/2023</h4>
+                                    <div class="incomeRef"><h4 class="referenceAdded"><i class="fa fa-comment"></i>From freelance work.</h4></div>
+                                    <i class="fa fa-trash-o"></i>
+                                </div>
+                            </div>
+
+                            <div class="incomeAdded">
+                                <h3 class="titleAdded">From Freelance</h3>
+                                <div class="incomeDetailList">
+                                    <i class="fa fa-money"></i>
+                                    <h4 class="moneyAdded"><i class="fa fa-dollar"></i>1400</h4>
+                                    <h4 class="dateAdded"><i class="fa fa-calendar"></i>25/02/2023</h4>
+                                    <div class="incomeRef"><h4 class="referenceAdded"><i class="fa fa-comment"></i>From freelance work.</h4></div>
+                                    <i class="fa fa-trash-o"></i>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EXPENSES -->
+                <div id="expenses" class="Expenses" style="display: none;">
+                    <h2>Expenses</h2>
+
+                    <div class="totalIncomeHeading">
+                        <h1>Total Expenses: <span style="color: red">{{ sumNegativeTransactions }}</span></h1>
+                    </div>
+
+                    <div class="mainIncomeSection">
+                        <div class="incomeAdd">
+                            <form action="/expense" method="post" class="incomeAddForm">
+                                <input type="text" name="expenseTitle" class="incomeTitleInput" placeholder="Expense Title" required>
+                                <input type="number" name="expenseAmount" class="incomeAmountInput" placeholder="Expense Amount" required>
+                                <input type="date" name="expenseDate" class="incomeDateInput" placeholder="Enter A Date" required>
+                                
+                                <select name="expenseType" class="incomeTypeofInput" required>
+                                    <option value="op1">Option1</option>
+                                    <option value="op2">Option2</option>
+                                    <option value="op3">Option3</option>
+                                    <option value="op4">Option4</option>
+                                </select>
+
+                                <textarea name="expenseReference" class="incomeReferenceInput" rows="8" cols="10" placeholder="Add A Reference"></textarea>
+
+                                <button class="addIncomeBut" type="submit">+ Add Income</button>
+                            </form>
+                        </div>
+
+                        <div class="IncomeList">
+                            {% for t in transactions %}
+                            {% if t.amount|float < 0 %}
+                            <div class="incomeAdded">
+                                <h3 class="titleAdded">{{ t.title }}</h3>
+                                <div class="incomeDetailList">
+                                    <i class="fa fa-money"></i>
+                                    <h4 class="moneyAdded"><i class="fa fa-dollar"></i> {{ t.amount }}</h4>
+                                    <h4 class="dateAdded"><i class="fa fa-calendar"></i>{{ t.incomeData }}</h4>
+                                    <div class="incomeRef"><h4 class="referenceAdded"><i class="fa fa-comment"></i>{{ t.reference or 'No reference' }}</h4></div>
+                                    <i class="fa fa-trash-o"></i>
+                                </div>
+                            </div>
+                            {% endif %}
+                            {% else %}
+                            <div class="no-expenses">
+                                <p>No expenses recorded yet.</p>
+                            </div>
+                            {% endfor %}
+
+                            <!-- <div class="incomeAdded">
+                                <h3 class="titleAdded">From Freelance</h3>
+                                <div class="incomeDetailList">
+                                    <i class="fa fa-money"></i>
+                                    <h4 class="moneyAdded"><i class="fa fa-dollar"></i>- 1400</h4>
+                                    <h4 class="dateAdded"><i class="fa fa-calendar"></i>25/02/2023</h4>
+                                    <div class="incomeRef"><h4 class="referenceAdded"><i class="fa fa-comment"></i>From freelance work.</h4></div>
+                                    <i class="fa fa-trash-o"></i>
+                                </div>
+                            </div>
+
+                            <div class="incomeAdded">
+                                <h3 class="titleAdded">From Freelance</h3>
+                                <div class="incomeDetailList">
+                                    <i class="fa fa-money"></i>
+                                    <h4 class="moneyAdded"><i class="fa fa-dollar"></i>- 1400</h4>
+                                    <h4 class="dateAdded"><i class="fa fa-calendar"></i>25/02/2023</h4>
+                                    <div class="incomeRef"><h4 class="referenceAdded"><i class="fa fa-comment"></i>From freelance work.</h4></div>
+                                    <i class="fa fa-trash-o"></i>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SETTINGS -->
+                <div id="settings" class="Settings" style="display: none;">
+                    <div class="formBox">
+                        <form action="/updateSettings" method="post">
+                            <h1>Settings</h1>
+
+                            <input type="email" name="updateEmail" class="incomeTitleInput" placeholder="Change your email">
+                            <input type="password" name="updatePassword" class="incomeTitleInput" placeholder="Change your password">
+                            <select name="updateCurrencySign" class="incomeTypeofInput" required>
+                                <option value="">Select the currency</option>
+                                <option value="£">£</option>
+                                <option value="$">$</option>
+                                <option value="€">€</option>
+                                <option value="₹">₹</option>
+                            </select>
+                            <button class="addIncomeBut" type="submit">Save Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js"></script>
+        <!-- <script src="{{ url_for('static', filename='chart.js') }}"></script> -->
+
+        <script>
+            // Parse the Python lists passed to the template into JavaScript variables
+            const labels = {{ chartLabels | tojson }};
+            const data = {{ chartData | tojson }};
+
+            const ctx = document.getElementById('barChart').getContext('2d');
+            const barChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Expenses by Type',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        </script>
+
+       <script>
+            function dashboard(){
+                document.getElementById('dashboard').style.display='flex';
+                document.getElementById('viewTrans').style.display='none';
+                document.getElementById('income').style.display='none';
+                document.getElementById('expenses').style.display='none';
+                document.getElementById('settings').style.display='none';
+            }
+
+            function viewTrans(){
+                document.getElementById('dashboard').style.display='none';
+                document.getElementById('viewTrans').style.display='block';
+                document.getElementById('income').style.display='none';
+                document.getElementById('expenses').style.display='none';
+                document.getElementById('settings').style.display='none';
+            }
+
+            function income(){
+                document.getElementById('dashboard').style.display='none';
+                document.getElementById('viewTrans').style.display='none';
+                document.getElementById('income').style.display='block';
+                document.getElementById('expenses').style.display='none';
+                document.getElementById('settings').style.display='none';
+            }
+
+            function expenses(){
+                document.getElementById('dashboard').style.display='none';
+                document.getElementById('viewTrans').style.display='none';
+                document.getElementById('income').style.display='none';
+                document.getElementById('expenses').style.display='block';
+                document.getElementById('settings').style.display='none';
+            }
+
+            function settings(){
+                document.getElementById('dashboard').style.display='none';
+                document.getElementById('viewTrans').style.display='none';
+                document.getElementById('income').style.display='none';
+                document.getElementById('expenses').style.display='none';
+                document.getElementById('settings').style.display='block';
+            }
+        </script>
+    </body>
+</html>

@@ -1,0 +1,158 @@
+html{
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.logHeading{
+    position: relative;
+    top: 50%;
+    left: 38%;
+    margin-top: 50px;
+}
+
+.logHeading img{   
+    position: relative;
+    top: 50%;
+    left: 9%;
+    margin-bottom: -25px;
+}
+
+.logHeading h1 {
+  font-size: 48px;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(0.5, #d13cff),  /* replace with your logo's first color */
+    color-stop(1, #6143ff)   /* replace with your logo's second color */
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.formsContainer{
+    width: 800px;
+    margin: 0px auto;
+    overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+}
+
+.sliderForms{
+    display: flex;
+    width: 200%;
+    transition: transform 0.5s ease;
+}
+
+.loginForm, .signUpForm{
+    background-color: rgba(255, 255, 255, 0.15);
+    position: relative;
+    max-width: 500px;
+    width: 400px;
+    margin: 50px auto;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    backdrop-filter: blur(55px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 20px;
+    padding: 32px 48px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.loginForm h1, .signUpForm h1{
+    color: #000;
+    font-size: 32px;
+    text-align: center;
+}
+
+.loginForm .inputBox, .signUpForm .inputBox{
+    position: relative;
+    margin: 55px 0;
+    max-width: 300px;
+    border-bottom: 2px solid #fff;
+}
+
+.loginForm .inputBox label, .signUpForm .inputBox label{
+    position: absolute;
+    bottom: 55%;
+    left: 5px;
+    transform: translateY(-50%);
+    /* color: #fff; */
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.5s ease-in-out;
+}
+
+.loginForm .inputBox input, .signUpForm .inputBox input{
+    width: 100%;
+    height: 60%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 0 35px 0 5px;
+}
+
+.forget{
+    margin: 35px 0;
+    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+}
+.forget label{
+    display: flex;
+    align-items: center;
+    margin-top: -3px;
+}
+.forget label input{
+    margin-right: 3px;
+}
+
+input[type="checkbox"]{
+    accent-color: #000;
+}
+
+.loginButton{
+    width: 100%;
+    height: 35px;
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    /* border: none; */
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.5s ease;
+}
+.loginButton:hover{
+    background: linear-gradient(135deg, #fed6e3 0%, #a8edea 100%);
+    box-shadow: 6px 6px 15px 10px rgba(0,0,0,0.7);
+}
+
+.registerNewAcc{
+    font-size: 12px;
+    color: #000;
+    text-align: center;
+    margin: 25px 0 20px;
+    position: relative;
+    left: 6px;
+}
+
+a{
+    text-decoration: none;
+    font-weight: 600;
+    color: #000;
+}
+a:hover{
+    text-decoration: underline;
+}

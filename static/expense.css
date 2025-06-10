@@ -1,0 +1,394 @@
+html{
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    overflow-x: hidden;
+}
+
+
+.mainDisplay{
+    display: flex;
+    gap: 32px;
+}
+
+.mainSection {
+    position: static; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    margin-top: 40px;
+}
+
+.sideBar{
+    background-color: rgba(255, 255, 255, 0.15);
+    position: relative;
+    max-width: 500px;
+    width: 250px;
+    margin-left: 25px;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+    backdrop-filter: blur(55px);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+    border-radius: 20px;
+    padding: 32px 48px;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+.sideItems{
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+.sideItems span{
+    font-size: 20px;
+}
+.sideItems ul li i{
+    position: relative;
+    right: 20px;
+}
+.sideItems ul li{
+    font-weight: 600;
+    position: relative;
+    bottom: 100px;
+    right: 70px;
+    width: 100%;
+    font-size: 20px;
+    list-style: none;
+    cursor: pointer;
+    margin: 25px 0;
+    padding: 10px 0 10px 16px;
+    /* border-left: 4px solid #000; */
+    transition: 0.3s ease-in-out;
+}
+.sideItems ul li:hover{
+    background: #fff;
+    border-left: 4px solid #fff;
+    border-radius: 20px;
+    /* right: 120px; */
+    transform: translateX(0px);
+}
+
+.sideItems ul li:hover i{
+    /* opacity: 0.5; */
+    /* visibility: hidden; */
+    display: none;
+}
+
+.profile{
+    position: relative;
+    bottom: 120px;
+    right: 80px;
+    display: flex;
+    align-items: center;
+}
+.profile img{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    margin-right: 20px;
+}
+
+.signout{
+    position: relative;
+    top: 115px;
+    right: 25px;;
+}
+.signout a{
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 20px;
+    color: #000;
+    position: relative;
+    bottom: 3px;
+    left: 5px;
+}
+
+.chart{
+    width: 560px;
+    padding: 32px;
+    border: 1px solid #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.8);
+    position: relative;
+    left: 50px;
+    top: 5px;
+}
+
+.listOfInfo{
+    position: relative;
+    left: 250px;
+    width: 400px;
+}
+
+.recentHistory h2{
+    position: relative;
+    right: 150px;
+    font-size: 30px;
+}
+
+.infoSection{
+    display: flex;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    justify-content: space-between;
+    align-items: center;
+    margin-left: -150px;
+    /* background: #fff; */
+    /* background: #fdf0f0;   */
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #fff;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+    font-weight: 600;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    height: 20px;
+    transition: ease-in-out .5s;
+}
+.infoSection:hover{
+    border: 2px solid pink;
+}
+
+.subheadingSalary{
+    display: flex;
+    position: relative;
+    right: 28px;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: -100px;
+}
+
+.totalSec{
+    text-align: center;
+    position: relative;
+    /* bottom: 200px; */
+    right: 60%;
+    top: 30%;
+    /* display: flex;
+    flex-wrap: wrap; */
+    width: 60%;
+}
+
+.totalIncome, .totalExpenses, .totalBalance{
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);
+    /* margin-left: 110px; */
+    border: 2px solid #fff;
+    height: 120px;
+    width: 200px;
+    padding: 10px;
+    border-radius: 20px;
+    margin-top: 30px;
+    transition: ease-in-out .5s;
+}
+.totalIncome:hover, .totalExpenses:hover, .totalBalance:hover, .totalIncomeHeading:hover, .addIncomeBut:hover{
+    border: 2px solid pink;
+}
+.totalBalance{
+    position: relative;
+    left: 150px;
+}
+.totalIncome{
+    position: relative;
+    left: 75%;
+    top: 23%;
+}
+
+.totalIncomeHeading{
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #fff;
+    width: 1100px;
+    text-align: center;
+    border-radius: 20px;
+    margin-top: 20px;
+    transition: ease-in-out .5s;
+}
+
+.Income h2, .Expenses h2{
+    position: relative;
+    left: 5px;
+    font-size: 30px;
+}
+
+input, select, textarea{
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 10px;
+    transition: ease-in-out .5s;
+    margin-top: 10px;
+}
+
+input{
+    height: 20px;
+    width: 60%;
+}
+
+select{
+    height: 50px;
+    width: 65%;
+}
+
+textarea{
+    width: 60%;
+}
+
+input:hover, select:hover, textarea:hover{
+    border: 2px solid pink;
+}
+
+.incomeAddForm{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 25px;
+}
+
+.addIncomeBut{
+    width: 285px;
+    margin-top: 10px;
+    border-radius: 50px;
+    height: 40px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+    border: 2px solid #fff;    
+    transition: ease-in-out 0.5s;
+}
+
+.incomeAdd{
+    /* border: 2px solid black; */
+    width: 50%;
+}
+
+.mainIncomeSection{
+    display: flex;
+}
+
+.IncomeList{
+    margin-top: 30px;
+    right: 70px;
+    position: relative;
+    /* overflow-y: scroll;
+    height: 600px;
+    width: 880px; */
+}
+
+.incomeAdded, .transactionAdded{
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid #fff;
+    border-radius: 20px;
+    padding: 10px;
+    /* width: 650px; */
+    margin-bottom: 20px;
+    transition: ease-in-out 0.5s;
+}
+
+.incomeAdded{
+    width: 650px;
+}
+
+.transactionAdded{
+    position: relative;
+    left: 70px;
+    width: 1080px;
+}
+
+.incomeDetailList{
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    left: 20px;
+}
+
+.titleAdded{
+    position: relative;
+    left: 20px;
+    margin-bottom: 2px;
+}
+
+.incomeDetailList .fa-money, .transactionAdded .fa-money{
+    font-size: 35px;
+}
+
+.incomeDetailList .fa-trash-o, .transactionAdded .fa-trash-o{
+    padding: 5px;
+    font-size: 20px;
+    position: relative;
+    top: 20px;
+    right: 10px;
+    border-radius: 50px;
+    transition: ease-in-out 0.5s;
+}
+
+.incomeDetailList .fa-trash-o:hover, .incomeAdded:hover, .transactionAdded:hover{
+    border: 2px solid pink;
+}
+
+.incomeAdded i, .transactionAdded i{
+    margin-right: 5px;
+}
+
+.incomeRef{
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: normal;
+    max-width: 30%;
+    flex: 1 1 100%;
+}
+
+.formBox{
+    /* background: #a8edea; */
+    background: linear-gradient(135deg, #fed6e3 0%, #a8edea 35%);
+    width: 600px;
+    height: 500px;
+    padding: 30px;
+    border: 2px solid #fff;
+    border-radius: 20px;
+    position: relative;
+    left: 30%;
+    top: 12%;
+    transition: ease-in-out 0.5s;
+}
+
+.formBox:hover{
+    border: 2px solid pink;
+}
+
+.formBox form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 15%;
+}
+
+.formBox form input, .formBox form select, .formBox form button{
+    width: 80%;
+}

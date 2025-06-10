@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='LoginSignup.css') }}">
+    </head>
+
+    <body>
+        
+        {% if msg %}
+            <p class="errorMessage">{{ msg }}</p>
+        {% endif %}
+
+        <div class="logHeading">
+            <img src="icons8-expense-64.png" alt="">
+            <h1>Expense Tracker</h1>
+        </div>
+
+        <div class="formsContainer">
+            <section class="sliderForms">
+                <section class="loginForm">
+                    <h1>Login</h1>
+                    <form action="/login" method="post">
+                        <div class="inputBox">
+                            <input type="email" name="email" class="emailInput">
+                            <label for="#" class="emailLabel">User</label>
+                        </div>
+        
+                        <div class="inputBox">
+                            <input type="password" name="password" class="passwordInput">
+                            <label for="#" class="passwordLabel">Password</label>
+                        </div>
+        
+                        <div class="forget">
+                            <label for="#"><input type="checkbox">Remember</label>
+                            <a href="#">Forgot Password</a>
+                        </div>
+                        <button class="loginButton">Login</button>
+                        <div class="registerNewAcc">
+                            <p>I do not have an account <a href="expense.html" id="showRegister">Register</a></p>
+                        </div>
+                    </form>
+                </section>
+        
+                <section class="signUpForm">
+                    <h1>Register An Account</h1>
+                    <form action="/register" method="post">
+                        <div class="inputBox">
+                            <input type="email" name="emailSign" class="emailInput">
+                            <label for="#" class="emailLabel">User Email</label>
+                        </div>
+        
+                        <div class="inputBox">
+                            <input type="name" name="name" class="nameInput">
+                            <label for="#" class="nameLabel">User Full Name</label>
+                        </div>
+        
+                        <div class="inputBox">
+                            <input type="password" name="passwordSign" class="passwordInput">
+                            <label for="#" class="passwordLabel">Password</label>
+                        </div>
+        
+                        <div class="inputBox">
+                            <input type="password" name="passwordConfirm" class="passwordInput">
+                            <label for="#" class="passwordLabel">Confirm Password</label>
+                        </div>
+        
+                        <button class="loginButton">Sign Up</button>
+                        <div class="registerNewAcc">
+                            <p>I do have an account <a href="expense.html" id="showLogin">Login</a></p>
+                        </div>
+                    </form>
+                </section>
+            </section>
+        </div>
+
+
+        <script>
+            const formsContainer = document.querySelector('.sliderForms');
+            const showRegister = document.getElementById('showRegister');
+            const showLogin = document.getElementById('showLogin');
+        
+            showRegister.addEventListener('click', (event) => {
+                event.preventDefault();
+                formsContainer.style.transform = 'translateX(-800px)';
+            });
+
+            showLogin.addEventListener('click', (event) => {
+                event.preventDefault();
+                formsContainer.style.transform = 'translateX(0px)';
+            });
+        </script>
+    </body>
+</html>
